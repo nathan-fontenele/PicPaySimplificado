@@ -1,0 +1,139 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Dev\\PicPaySimplificado\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{42E16D9B-2571-469D-A203-0E2AC24B2A59}|PicPaySimplificado.csproj|c:\\dev\\picpaysimplificado\\infrastructure\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42E16D9B-2571-469D-A203-0E2AC24B2A59}|PicPaySimplificado.csproj|solutionrelative:infrastructure\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42E16D9B-2571-469D-A203-0E2AC24B2A59}|PicPaySimplificado.csproj|c:\\dev\\picpaysimplificado\\domain\\commonusersentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42E16D9B-2571-469D-A203-0E2AC24B2A59}|PicPaySimplificado.csproj|solutionrelative:domain\\commonusersentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42E16D9B-2571-469D-A203-0E2AC24B2A59}|PicPaySimplificado.csproj|c:\\dev\\picpaysimplificado\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42E16D9B-2571-469D-A203-0E2AC24B2A59}|PicPaySimplificado.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42E16D9B-2571-469D-A203-0E2AC24B2A59}|PicPaySimplificado.csproj|c:\\dev\\picpaysimplificado\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{42E16D9B-2571-469D-A203-0E2AC24B2A59}|PicPaySimplificado.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42E16D9B-2571-469D-A203-0E2AC24B2A59}|PicPaySimplificado.csproj|c:\\dev\\picpaysimplificado\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{42E16D9B-2571-469D-A203-0E2AC24B2A59}|PicPaySimplificado.csproj|solutionrelative:appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42E16D9B-2571-469D-A203-0E2AC24B2A59}|PicPaySimplificado.csproj|c:\\dev\\picpaysimplificado\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{42E16D9B-2571-469D-A203-0E2AC24B2A59}|PicPaySimplificado.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42E16D9B-2571-469D-A203-0E2AC24B2A59}|PicPaySimplificado.csproj|c:\\dev\\picpaysimplificado\\infrastructure\\commonuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42E16D9B-2571-469D-A203-0E2AC24B2A59}|PicPaySimplificado.csproj|solutionrelative:infrastructure\\commonuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 259,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Dev\\PicPaySimplificado\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
+              "ToolTip": "C:\\Dev\\PicPaySimplificado\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-03-18T02:48:05.546Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Dev\\PicPaySimplificado\\Infrastructure\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\AppDbContext.cs",
+              "ToolTip": "C:\\Dev\\PicPaySimplificado\\Infrastructure\\AppDbContext.cs",
+              "RelativeToolTip": "Infrastructure\\AppDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-18T02:23:28.829Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Dev\\PicPaySimplificado\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "appsettings.Development.json",
+              "ToolTip": "C:\\Dev\\PicPaySimplificado\\appsettings.Development.json",
+              "RelativeToolTip": "appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-03-18T02:46:27.672Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Dev\\PicPaySimplificado\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Dev\\PicPaySimplificado\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-03-18T02:44:43.039Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CommonUsersEntity.cs",
+              "DocumentMoniker": "C:\\Dev\\PicPaySimplificado\\Domain\\CommonUsersEntity.cs",
+              "RelativeDocumentMoniker": "Domain\\CommonUsersEntity.cs",
+              "ToolTip": "C:\\Dev\\PicPaySimplificado\\Domain\\CommonUsersEntity.cs",
+              "RelativeToolTip": "Domain\\CommonUsersEntity.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAABcAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-18T02:51:48.315Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Dev\\PicPaySimplificado\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Dev\\PicPaySimplificado\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-18T02:44:23.413Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CommonUserRepository.cs",
+              "DocumentMoniker": "C:\\Dev\\PicPaySimplificado\\Infrastructure\\CommonUserRepository.cs",
+              "RelativeDocumentMoniker": "Infrastructure\\CommonUserRepository.cs",
+              "ToolTip": "C:\\Dev\\PicPaySimplificado\\Infrastructure\\CommonUserRepository.cs",
+              "RelativeToolTip": "Infrastructure\\CommonUserRepository.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAQwBYAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-18T01:54:45.226Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

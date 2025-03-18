@@ -1,0 +1,18 @@
+[
+  {
+    "ContainingType": "PicPaySimplificado.Controllers.CommonUserController",
+    "Method": "CreateUser",
+    "RelativePath": "CommonUser",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "PicPaySimplificado.Controllers.CreateUserRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
