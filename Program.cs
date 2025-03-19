@@ -28,6 +28,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<ICommonUserRepository, CommonUserRepository>();
 builder.Services.AddScoped<CommomUserService>();
 
+builder.Services.AddScoped<ISellerUserRepository, SellerUserRepository>();
+builder.Services.AddScoped<SellerUserService>();
+
 var app = builder.Build();
 
 // ✅ Habilitar Swagger apenas no ambiente de desenvolvimento

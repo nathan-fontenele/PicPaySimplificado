@@ -158,4 +158,3 @@ C:\Dev\PicPaySimplificado\bin\Debug\net9.0\runtimes\win-arm\native\e_sqlite3.dll
 C:\Dev\PicPaySimplificado\bin\Debug\net9.0\runtimes\win-arm64\native\e_sqlite3.dll
 C:\Dev\PicPaySimplificado\bin\Debug\net9.0\runtimes\win-x64\native\e_sqlite3.dll
 C:\Dev\PicPaySimplificado\bin\Debug\net9.0\runtimes\win-x86\native\e_sqlite3.dll
-C:\Dev\PicPaySimplificado\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

@@ -21,6 +21,7 @@ namespace PicPaySimplificado.Application
                 throw new Exception("Email já cadastrado");
 
             var user = new CommonUsersEntity(fullname, cpf, email, password);
+            await _repository.AddAsync(user);
         }
     }
 }

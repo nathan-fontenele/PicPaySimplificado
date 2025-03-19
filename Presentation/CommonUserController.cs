@@ -21,7 +21,7 @@ namespace PicPaySimplificado.Controllers
             {
                 await _service.CreateUserAsync(request.FullName, request.Cpf, request.Email, request.Password);
 
-                return Ok(new { Message = "Usuário criado com sucesso!" });
+                return Ok(new { Message = "Usuï¿½rio criado com sucesso!" });
             }
             catch (Exception ex)
             {
