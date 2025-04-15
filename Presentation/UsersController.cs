@@ -62,7 +62,7 @@ public class UsersController : ControllerBase
         try
         {
             // Tenta buscar o usuário pelo GUID
-            var user = await _usersService.FindUserByIdAsync(guid);
+            var user =  _usersService.FindUserByIdAsync(guid);
 
             if (user == null)
                 return NotFound(new { Message = "User not found" });

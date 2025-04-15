@@ -35,15 +35,15 @@ public class UsersRepository : IUsersRepository
             .FirstOrDefaultAsync(u => EF.Property<string>(EF.Property<object>(u, "_document"), "DocumentNumber") == documentId);
     }
 
-    public async Task<Users?> FindUserByIdAsync(string userId)
+    public Users FindUserByIdAsync(string userId)
     {
         if (!Guid.TryParse(userId, out Guid guid))
         {
             throw new ArgumentException("Invalid GUID format.");
         }
 
-        return await _context.Users
-            .FirstOrDefaultAsync(u => EF.Property<Guid>(u, "_guid") == guid); 
+        return  _context.Users
+            .FirstOrDefault(u => EF.Property<Guid>(u, "_guid") == guid); 
     }
     
     public async Task AddAsync(Users user)

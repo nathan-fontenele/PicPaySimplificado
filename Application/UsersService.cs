@@ -50,9 +50,9 @@ public class UsersService
         await _usersRepository.AddAsync(user);
     }
 
-    public async Task<Users> FindUserByIdAsync(string userId)
+    public Users FindUserByIdAsync(string userId)
     {
-        var user = await this._usersRepository.FindUserByIdAsync(userId);
+        var user = this._usersRepository.FindUserByIdAsync(userId);
 
         if (user == null)
             throw new Exception("User not found");
