@@ -7,10 +7,8 @@ using PicPaySimplificado.Infrastructure;
 var builder = WebApplication.CreateBuilder(args);
 SQLitePCL.Batteries.Init();
 
-// Add services to the container.
 builder.Services.AddControllers();
 
-// ✅ Configuração correta do Swagger
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
@@ -20,20 +18,15 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-// ✅ Configuração do Banco de Dados SQLite
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// ✅ Registro de dependências
-builder.Services.AddScoped<ICommonUserRepository, CommonUserRepository>();
-builder.Services.AddScoped<CommomUserService>();
-
-builder.Services.AddScoped<ISellerUserRepository, SellerUserRepository>();
-builder.Services.AddScoped<SellerUserService>();
+builder.Services.AddScoped<IUsersRepository, UsersRepository>();
+builder.Services.AddScoped<UsersService>();
+builder.Services.AddScoped<UsersRepository>();
 
 var app = builder.Build();
 
-// ✅ Habilitar Swagger apenas no ambiente de desenvolvimento
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
