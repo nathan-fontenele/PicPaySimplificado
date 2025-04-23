@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using PicPaySimplificado.Application;
+using PicPaySimplificado.Domain;
 using PicPaySimplificado.Domain.Repositories;
 using PicPaySimplificado.Infrastructure;
 
@@ -24,6 +25,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 builder.Services.AddScoped<UsersService>();
 builder.Services.AddScoped<UsersRepository>();
+builder.Services.AddScoped<ITransactionRepository<Transaction, Guid>, TransactionRepository>();
 
 var app = builder.Build();
 

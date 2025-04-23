@@ -7,6 +7,14 @@
       "RelativeMoniker": "D:0:0:{42E16D9B-2571-469D-A203-0E2AC24B2A59}|PicPaySimplificado.csproj|solutionrelative:application\\transactionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{42E16D9B-2571-469D-A203-0E2AC24B2A59}|PicPaySimplificado.csproj|c:\\dev\\picpaysimplificado\\domain\\transactionentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42E16D9B-2571-469D-A203-0E2AC24B2A59}|PicPaySimplificado.csproj|solutionrelative:domain\\transactionentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42E16D9B-2571-469D-A203-0E2AC24B2A59}|PicPaySimplificado.csproj|c:\\dev\\picpaysimplificado\\dtos\\transactiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42E16D9B-2571-469D-A203-0E2AC24B2A59}|PicPaySimplificado.csproj|solutionrelative:dtos\\transactiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{42E16D9B-2571-469D-A203-0E2AC24B2A59}|PicPaySimplificado.csproj|c:\\dev\\picpaysimplificado\\infrastructure\\transactionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{42E16D9B-2571-469D-A203-0E2AC24B2A59}|PicPaySimplificado.csproj|solutionrelative:infrastructure\\transactionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -18,15 +26,35 @@
       "DocumentGroups": [
         {
           "DockedWidth": 259,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "TransactionEntity.cs",
+              "DocumentMoniker": "C:\\Dev\\PicPaySimplificado\\Domain\\TransactionEntity.cs",
+              "RelativeDocumentMoniker": "Domain\\TransactionEntity.cs",
+              "ToolTip": "C:\\Dev\\PicPaySimplificado\\Domain\\TransactionEntity.cs",
+              "RelativeToolTip": "Domain\\TransactionEntity.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-15T02:41:01.858Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TransactionDto.cs",
+              "DocumentMoniker": "C:\\Dev\\PicPaySimplificado\\DTOs\\TransactionDto.cs",
+              "RelativeDocumentMoniker": "DTOs\\TransactionDto.cs",
+              "ToolTip": "C:\\Dev\\PicPaySimplificado\\DTOs\\TransactionDto.cs",
+              "RelativeToolTip": "DTOs\\TransactionDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-15T01:47:35.914Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "TransactionRepository.cs",
               "DocumentMoniker": "C:\\Dev\\PicPaySimplificado\\Infrastructure\\TransactionRepository.cs",
               "RelativeDocumentMoniker": "Infrastructure\\TransactionRepository.cs",
@@ -34,8 +62,7 @@
               "RelativeToolTip": "Infrastructure\\TransactionRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-15T01:28:57.879Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-15T01:28:57.879Z"
             },
             {
               "$type": "Document",
@@ -45,7 +72,7 @@
               "RelativeDocumentMoniker": "Application\\TransactionService.cs",
               "ToolTip": "C:\\Dev\\PicPaySimplificado\\Application\\TransactionService.cs",
               "RelativeToolTip": "Application\\TransactionService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAAABYAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-15T01:27:09.33Z",
               "EditorCaption": ""

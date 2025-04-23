@@ -5,26 +5,26 @@
     "version": "v1"
   },
   "paths": {
-    "/CommonUser": {
+    "/api/Users/createUser": {
       "post": {
         "tags": [
-          "CommonUser"
+          "Users"
         ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateUserRequest"
+                "$ref": "#/components/schemas/CreateUsersRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateUserRequest"
+                "$ref": "#/components/schemas/CreateUsersRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateUserRequest"
+                "$ref": "#/components/schemas/CreateUsersRequest"
               }
             }
           }
@@ -35,26 +35,77 @@
           }
         }
       }
+    },
+    "/api/Users/getUserByDocument": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "DocumentNumber",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Users/getUserById": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "guid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
-      "CreateUserRequest": {
+      "CreateUsersRequest": {
         "type": "object",
         "properties": {
           "fullName": {
             "type": "string",
             "nullable": true
           },
-          "cpf": {
-            "type": "string",
-            "nullable": true
+          "document": {
+            "$ref": "#/components/schemas/Document"
           },
           "email": {
             "type": "string",
             "nullable": true
           },
           "password": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Document": {
+        "type": "object",
+        "properties": {
+          "documentNumber": {
             "type": "string",
             "nullable": true
           }

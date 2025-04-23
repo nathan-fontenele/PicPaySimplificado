@@ -17,19 +17,19 @@ namespace PicPaySimplificado.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.3");
 
-            modelBuilder.Entity("PicPaySimplificado.Domain.TransactionEntity", b =>
+            modelBuilder.Entity("PicPaySimplificado.Domain.Transaction", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
                     b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("Amount");
 
                     b.Property<DateTime>("Created")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+                        .HasColumnType("datetime")
+                        .HasColumnName("Created");
 
                     b.Property<Guid>("ReceiverId")
                         .HasColumnType("TEXT");
@@ -43,7 +43,7 @@ namespace PicPaySimplificado.Migrations
 
                     b.HasIndex("SenderId");
 
-                    b.ToTable("Transactions");
+                    b.ToTable("Transactions", (string)null);
                 });
 
             modelBuilder.Entity("PicPaySimplificado.Domain.Users", b =>
@@ -87,16 +87,16 @@ namespace PicPaySimplificado.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
-            modelBuilder.Entity("PicPaySimplificado.Domain.TransactionEntity", b =>
+            modelBuilder.Entity("PicPaySimplificado.Domain.Transaction", b =>
                 {
                     b.HasOne("PicPaySimplificado.Domain.Users", "Receiver")
-                        .WithMany()
+                        .WithMany("ReceivedTransactions")
                         .HasForeignKey("ReceiverId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("PicPaySimplificado.Domain.Users", "Sender")
-                        .WithMany()
+                        .WithMany("SentTransactions")
                         .HasForeignKey("SenderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -118,6 +118,9 @@ namespace PicPaySimplificado.Migrations
                                 .HasColumnType("TEXT")
                                 .HasColumnName("Document");
 
+                            b1.Property<int>("UserType")
+                                .HasColumnType("INTEGER");
+
                             b1.HasKey("Users_guid");
 
                             b1.HasIndex("DocumentNumber")
@@ -131,6 +134,13 @@ namespace PicPaySimplificado.Migrations
 
                     b.Navigation("_document")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("PicPaySimplificado.Domain.Users", b =>
+                {
+                    b.Navigation("ReceivedTransactions");
+
+                    b.Navigation("SentTransactions");
                 });
 #pragma warning restore 612, 618
         }

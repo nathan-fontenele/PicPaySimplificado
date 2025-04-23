@@ -18,16 +18,14 @@ public class UsersController : ControllerBase
         _usersService = usersService;
     }
 
-    [HttpPost]
-    [Route("createUser")]
-    public async Task<IActionResult> CreateSeller([FromBody] CreateUsersRequest user)
+    [HttpPost("createUser")]
+    public async Task<IActionResult> CreateUser([FromBody] CreateUsersRequest user)
     {
         try
         {
-            await _usersService.CreateUserAsync(user.FullName, user.Document, user.Email,
-                user.Password);
+            await _usersService.CreateUserAsync(user.FullName, user.Document, user.Email, user.Password);
             
-            return Ok(new {Message = "User created successfully"});
+            return Ok(new { Message = "User created successfully" });
         }
         catch (Exception ex)
         {
@@ -35,19 +33,33 @@ public class UsersController : ControllerBase
         }
     }
 
-    [HttpGet]
-    [Route("getUserByDocument")]
-    public async Task<IActionResult> GetUserByDocument([FromQuery] Document document)
+    [HttpGet("getUsers")]
+    public async Task<IActionResult> GetUsers()
     {
         try
         {
+            var users = await _usersService.GetUsers();
+            return Ok(users.ToList());
+        }
+        catch (Exception e)
+        {
+            return BadRequest(new { Message = e.Message });
+        }
+    }
+
+    [HttpGet("getUserByDocument")]
+    public async Task<IActionResult> GetUserByDocument([FromQuery(Name = "DocumentNumber")] string documentNumber)
+    {
+        try
+        {
+            var document = new Document(documentNumber);
             var user = await _usersService.FindUserByDocumentAsync(document.DocumentNumber);
+
             return Ok(new
             {
                 Document = user.GetDocument(),
-                Email = user.GetEmail(),
-                Balance = user.GetBalance(),
-                UserType = user.GetUserType().GetDisplayName()
+                Email    = user.GetEmail(),
+                Balance  = user.GetBalance()
             });
         }
         catch
@@ -56,13 +68,13 @@ public class UsersController : ControllerBase
         }
     }
 
+
     [HttpGet("getUserById")]
     public async Task<IActionResult> GetUserById([FromQuery] string guid)
     {
         try
         {
-            // Tenta buscar o usuário pelo GUID
-            var user =  _usersService.FindUserByIdAsync(guid);
+            var user =  await _usersService.FindUserByIdAsync(guid);
 
             if (user == null)
                 return NotFound(new { Message = "User not found" });
@@ -78,11 +90,9 @@ public class UsersController : ControllerBase
         catch (Exception ex)
         {
 
-            // Retornar uma resposta de erro interna mais informativa
             return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "Ocorreu um erro inesperado", Exception = ex.Message });
         }
     }
-
 }
 
 public class CreateUsersRequest

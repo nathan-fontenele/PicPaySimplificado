@@ -35,7 +35,13 @@ public class UsersRepository : IUsersRepository
             .FirstOrDefaultAsync(u => EF.Property<string>(EF.Property<object>(u, "_document"), "DocumentNumber") == documentId);
     }
 
-    public Users FindUserByIdAsync(string userId)
+    public Task UpdateAsync(Users user)
+    {
+        _context.Users.Update(user);
+        return _context.SaveChangesAsync();
+    }
+
+    public async Task<Users> FindUserByIdAsync(string userId)
     {
         if (!Guid.TryParse(userId, out Guid guid))
         {
@@ -53,4 +59,9 @@ public class UsersRepository : IUsersRepository
     }
 
 
+    public async Task<List<Users>> GetAll()
+    {
+        return await _context.Users
+            .ToListAsync();
+    }
 }

@@ -19,12 +19,14 @@ public class Users
     
     private  decimal _balance { get;  set; }
     
-
     private UserType _userType { get;  set; }
+    
+    public ICollection<Transaction> SentTransactions { get;  set; } = new List<Transaction>();
+    public ICollection<Transaction> ReceivedTransactions { get;  set; } = new List<Transaction>();
     
     private  Users(){}
 
-    public Users(string  fullname, string email, Document document, string password)
+    public Users(string  fullname, string email, string document, string password)
     {
         if (string.IsNullOrWhiteSpace(fullname)) throw new ArgumentNullException("Fullname is required.");
         if (string.IsNullOrWhiteSpace(password)) throw new ArgumentNullException("Password is required.");
@@ -32,7 +34,7 @@ public class Users
         _guid = Guid.NewGuid();
         _fullname = fullname;
         _email = email;
-        _document = document;
+        _document = new Document(document);
         _password = password;
     }
     
@@ -68,5 +70,10 @@ public class Users
     public decimal GetBalance()
     {
         return _balance;
+    }
+
+    public void setBalance(decimal getBalance)
+    {
+        _balance = getBalance;
     }
 }

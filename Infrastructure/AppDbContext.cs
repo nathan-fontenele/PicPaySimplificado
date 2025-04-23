@@ -7,6 +7,7 @@ namespace PicPaySimplificado.Infrastructure
     public class AppDbContext : DbContext
     {
         public DbSet<Users> Users { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
@@ -59,20 +60,35 @@ namespace PicPaySimplificado.Infrastructure
                 });
             });
 
-            modelBuilder.Entity<TransactionEntity>(entity =>
-            {
-                entity.HasKey("Id");
 
-                entity.Property<decimal>("Amount").HasColumnType("decimal(18,2)").IsRequired();
+            modelBuilder.Entity<Transaction>(entity =>
+            {
+                entity.ToTable("Transactions");
+
+                entity.HasKey(t => t.Id);
+
+                entity.Property(t => t.Amount)
+                    .HasColumnName("Amount")
+                    .HasColumnType("decimal(18,2)")
+                    .IsRequired();
+
+                entity.Property(t => t.Created)
+                    .HasColumnName("Created")
+                    .HasColumnType("datetime");
                 
-                entity.Property<DateTime>("Created").HasDefaultValueSql("CURRENT_TIMESTAMP");  
-                
-                entity.HasOne<Users>("Sender").WithMany().HasForeignKey("SenderId").OnDelete(DeleteBehavior.Cascade);
-                
-                entity.HasOne<Users>("Receiver").WithMany().HasForeignKey("ReceiverId").OnDelete(DeleteBehavior.Restrict);
+                //Aqui fica o relacionamento 1:N
+                //Um usuário pode ter diversas transações
+                entity.HasOne(t => t.Sender)
+                    .WithMany(u => u.SentTransactions)
+                    .HasForeignKey(t => t.SenderId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(t => t.Receiver)
+                    .WithMany(u => u.ReceivedTransactions)
+                    .HasForeignKey(t => t.ReceiverId)
+                    .OnDelete(DeleteBehavior.Cascade);
             });
             
-
             base.OnModelCreating(modelBuilder);
         }
     }

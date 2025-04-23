@@ -1,16 +1,48 @@
 [
   {
-    "ContainingType": "PicPaySimplificado.Controllers.CommonUserController",
-    "Method": "CreateUser",
-    "RelativePath": "CommonUser",
+    "ContainingType": "PicPaySimplificado.Controllers.UsersController",
+    "Method": "CreateSeller",
+    "RelativePath": "api/Users/createUser",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "PicPaySimplificado.Controllers.CreateUserRequest",
+        "Name": "user",
+        "Type": "PicPaySimplificado.Controllers.CreateUsersRequest",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PicPaySimplificado.Controllers.UsersController",
+    "Method": "GetUserByDocument",
+    "RelativePath": "api/Users/getUserByDocument",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "DocumentNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PicPaySimplificado.Controllers.UsersController",
+    "Method": "GetUserById",
+    "RelativePath": "api/Users/getUserById",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "guid",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

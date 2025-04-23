@@ -1,5 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 using Microsoft.Extensions.Options;
+using PicPaySimplificado.Domain;
 
 namespace PicPaySimplificado.ValueObject;
 
@@ -7,19 +8,34 @@ public class Document
 {
     public string DocumentNumber { get; set; }
     
-    [JsonConstructor]
+    [JsonIgnore]
+    public UserType UserType { get; private set; }
+    
+    public Document() { }
+    
     public Document(string documentNumber)
     {
-        if (!IsValid(documentNumber))
-            throw new Exception("Document number invalid");
+        if (string.IsNullOrEmpty(documentNumber))
+        {
+            throw new ArgumentException("Document Number cannot be null or empty.");
+        }
 
-        DocumentNumber = documentNumber;
+        if (IsValidCpf(documentNumber))
+        {
+            DocumentNumber = documentNumber;
+            UserType = UserType.Common;
+        }
+        else if (IsValidCnpj(documentNumber))
+        {
+            DocumentNumber = documentNumber;
+            UserType = UserType.Merchant;
+        }
+        else
+        {
+            throw new ArgumentException("Document Number is invalid.");
+        }
     }
-
-    public Document()
-    {
-        
-    }
+    
     public bool IsValid(string documentNumber)
     {
         if (documentNumber.Length == 11)
