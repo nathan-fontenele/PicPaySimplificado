@@ -1,4 +1,4 @@
-﻿namespace PicPaySimplificado.Domain.Repositories;
+﻿namespace PicPaySimplificado.Domain.Interfaces;
 
 public interface IUsersRepository
 {

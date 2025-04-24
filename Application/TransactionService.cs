@@ -1,55 +1,93 @@
-﻿using PicPaySimplificado.Domain;
-using PicPaySimplificado.DTOs;
-using PicPaySimplificado.Infrastructure;
-using System.Runtime.Serialization;
+﻿using System.Text;
 using System.Text.Json;
+using PicPaySimplificado.Domain;
+using PicPaySimplificado.Domain.Interfaces;
+using PicPaySimplificado.DTOs;
 
-namespace PicPaySimplificado.Application;
-
-public class TransactionService
+namespace PicPaySimplificado.Application
 {
-    private UsersService _usersService;
-    private TransactionRepository _transactionRepository;
-    
-    public async Task CreateTransaction(TransactionDto transaction)
+    public class TransactionService
     {
-        Users sender = await this._usersService.FindUserByIdAsync(transaction.senderId);
-        Users receiver = await this._usersService.FindUserByIdAsync(transaction.receiverId);
+        private readonly UsersService _usersService;
+        private readonly ITransactionRepository<Transaction, Guid> _transactionRepository;
+        private readonly NotificationService _notificationService;
 
-        ValidateTransaction(sender, transaction.value);
-
-        bool isAuthorize = this.ValidateTransaction(sender, transaction.value);
-
-        if (!isAuthorize) {
-            throw new Exception("Unauthorized transaction");
-        }
-
-        Transaction newTransaction = new Transaction();
-        newTransaction.setAmount(transaction.value);
-        newTransaction.setSender(sender);
-        newTransaction.setReceiver(receiver);
-        newTransaction.setTimeStampo(DateTime.Now);
-
-        sender.setBalance(sender.GetBalance() - newTransaction.Amount);
-        receiver.setBalance(receiver.GetBalance() + newTransaction.Amount);
-
-        _transactionRepository.AddAsync(newTransaction);
-        _usersService.UpdateUserAsync(sender);
-        _usersService.UpdateUserAsync(receiver);
-    }
-
-    public bool ValidateTransaction (Users sender, decimal value)
-    {
-        HttpClient httpClient = new HttpClient();
-        var response = httpClient.GetAsync("https://util.devi.tools/api/v2/authorize");
-
-        if (response.IsCompleted)
+        public TransactionService(
+            UsersService usersService,
+            ITransactionRepository<Transaction, Guid> transactionRepository)
         {
-            var result = JsonSerializer.Deserialize<ValidationTransactionDto>(response.Result.Content.ReadAsStream());
-            return result?.Data?.Authorization ?? false;
+            _usersService = usersService ?? throw new ArgumentNullException(nameof(usersService));
+            _transactionRepository = transactionRepository ?? throw new ArgumentNullException(nameof(transactionRepository));
+            _notificationService = new NotificationService();
         }
 
-        return false;
+        public async Task<Transaction> CreateTransactionAsync(TransactionDto transaction)
+        {
+            var sender = await _usersService.FindUserByIdAsync(transaction.senderId)
+                         ?? throw new ArgumentException($"Sender '{transaction.senderId}' not found");
+            var receiver = await _usersService.FindUserByIdAsync(transaction.receiverId)
+                         ?? throw new ArgumentException($"Receiver '{transaction.receiverId}' not found");
+            
+            _usersService.ValidateSenderForTransaction(sender, transaction.value);
+            
+            bool isAuthorized = this._usersService.ValidateSenderForTransaction(sender, transaction.value);
+            if (!isAuthorized)
+            {
+                throw new UnauthorizedAccessException("Unauthorized");
+            }
+
+            if (!await ValidateTransactionAsync(transaction.value))
+                throw new InvalidOperationException("Unauthorized transaction");
+
+            var newTransaction = new Transaction
+            {
+                Amount = transaction.value,
+                SenderId = sender._guid,
+                ReceiverId = receiver._guid,
+                Created = DateTime.UtcNow
+            };
+
+            sender._balance = sender.GetBalance() - newTransaction.Amount;
+            receiver._balance = receiver.GetBalance() + newTransaction.Amount;
+
+            await _transactionRepository.AddAsync(newTransaction);
+            await _usersService.UpdateUserAsync(sender);
+            await _usersService.UpdateUserAsync(receiver);
+
+            _notificationService.SendeNotification(sender, "Transaction sent successfully");
+            _notificationService.SendeNotification(receiver, "Transaction received successfully");
+
+            return newTransaction;
+        }
+
+        private async Task<bool> ValidateTransactionAsync(decimal amount)
+        {
+            using var httpClient = new HttpClient();
+            
+            try
+            {
+                var requestUri = $"https://util.devi.tools/api/v2/authorize";
+                var response = await httpClient.GetAsync(requestUri);
+                
+                if (!response.IsSuccessStatusCode)
+                    return false;
+
+                var json = await response.Content.ReadAsStringAsync();
+                var result = JsonSerializer.Deserialize<ValidationTransactionDto>(json, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+
+                
+                return string.Equals(result?.Status, "success", StringComparison.OrdinalIgnoreCase)
+                       && (result.Data?.Authorization ?? false);
+
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
     }
-    
 }

@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PicPaySimplificado.Domain;
-using PicPaySimplificado.Domain.Repositories;
+using PicPaySimplificado.Domain.Interfaces;
 
 namespace PicPaySimplificado.Infrastructure;
 
-public class TransactionRepository: ITransactionRepository<Transaction, Guid>{
+public class TransactionRepository: ITransactionRepository<Transaction, Guid>
+{
     
     private readonly AppDbContext _context;
 

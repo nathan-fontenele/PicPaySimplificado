@@ -8,7 +8,7 @@ namespace PicPaySimplificado.Domain;
 public class Transaction
 {
     public Guid Id { get; set; } 
-    public decimal Amount { get; private set; }
+    public decimal Amount { get; set; }
     
     public Guid SenderId { get;  set; }
     public Users Sender { get; set; }

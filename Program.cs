@@ -2,7 +2,7 @@
 using Microsoft.OpenApi.Models;
 using PicPaySimplificado.Application;
 using PicPaySimplificado.Domain;
-using PicPaySimplificado.Domain.Repositories;
+using PicPaySimplificado.Domain.Interfaces;
 using PicPaySimplificado.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,9 +22,11 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 builder.Services.AddScoped<UsersService>();
 builder.Services.AddScoped<UsersRepository>();
+builder.Services.AddScoped<IUsersRepository, UsersRepository>();
+builder.Services.AddScoped<TransactionService>();
+builder.Services.AddScoped<TransactionRepository>();
 builder.Services.AddScoped<ITransactionRepository<Transaction, Guid>, TransactionRepository>();
 
 var app = builder.Build();

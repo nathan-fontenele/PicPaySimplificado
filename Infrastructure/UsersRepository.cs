@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PicPaySimplificado.Domain;
-using PicPaySimplificado.Domain.Repositories;
+using PicPaySimplificado.Domain.Interfaces;
 using PicPaySimplificado.ValueObject;
 
 namespace PicPaySimplificado.Infrastructure;
@@ -57,11 +57,9 @@ public class UsersRepository : IUsersRepository
         _context.Users.Add(user);
         await _context.SaveChangesAsync();
     }
-
-
+    
     public async Task<List<Users>> GetAll()
     {
-        return await _context.Users
-            .ToListAsync();
+        return await _context.Users.ToListAsync();
     }
 }

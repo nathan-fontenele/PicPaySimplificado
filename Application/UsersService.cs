@@ -1,5 +1,5 @@
 ﻿using PicPaySimplificado.Domain;
-using PicPaySimplificado.Domain.Repositories;
+using PicPaySimplificado.Domain.Interfaces;
 using PicPaySimplificado.Infrastructure;
 using PicPaySimplificado.ValueObject;
 
@@ -14,7 +14,7 @@ public class UsersService
         _usersRepository = usersRepository;
     }
 
-    public void ValidateSenderForTransaction(Users sender, decimal amount)
+    public bool ValidateSenderForTransaction(Users sender, decimal amount)
     {
         if (sender.GetUserType() == UserType.Merchant)
         {
@@ -25,12 +25,25 @@ public class UsersService
         {
             throw new Exception("Insufficient balance");
         }
+        
+        return true;
     }
 
+    public async Task CreateUserAsync(string fullName, Document document, decimal balance, string email, string password)
+    {
+        if (await _usersRepository.DocumentExistAsync(document.DocumentNumber))
+            throw new Exception("Document already exists");
+
+        if (await _usersRepository.EmailExistAsync(email))
+            throw new Exception("Email already exists");
+        
+        var user = new Users(fullName, document.DocumentNumber, balance, email,  password);
+        await _usersRepository.AddAsync(user);
+    }
+    
     public async Task<List<Users>> GetUsers()
     {
-        var users = _usersRepository.GetAll();
-        return await users;
+        return await _usersRepository.GetAll();
     }
 
     public async Task<Users> FindUserByDocumentAsync(string document)
@@ -43,18 +56,6 @@ public class UsersService
         return user;
     }
     
-    public async Task CreateUserAsync(string fullName, Document document, string email, string password)
-    {
-        if (await _usersRepository.DocumentExistAsync(document.DocumentNumber))
-            throw new Exception("Document already exists");
-
-        if (await _usersRepository.EmailExistAsync(email))
-            throw new Exception("Email already exists");
-        
-        var user = new Users(fullName, email, document.DocumentNumber, password);
-        await _usersRepository.AddAsync(user);
-    }
-
     public async Task<Users> FindUserByIdAsync(string userId)
     {
         var user = await  this._usersRepository.FindUserByIdAsync(userId);

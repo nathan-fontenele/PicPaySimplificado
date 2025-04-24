@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Extensions;
 using PicPaySimplificado.Application;
-using PicPaySimplificado.Domain;
+using PicPaySimplificado.DTOs;
 using PicPaySimplificado.ValueObject;
 
 namespace PicPaySimplificado.Controllers;
@@ -19,11 +18,11 @@ public class UsersController : ControllerBase
     }
 
     [HttpPost("createUser")]
-    public async Task<IActionResult> CreateUser([FromBody] CreateUsersRequest user)
+    public async Task<IActionResult> CreateUser([FromBody] CreateUsersRequestDto user)
     {
         try
         {
-            await _usersService.CreateUserAsync(user.FullName, user.Document, user.Email, user.Password);
+            await _usersService.CreateUserAsync(user.fullname, user.document, user.balance, user.email, user.password);
             
             return Ok(new { Message = "User created successfully" });
         }
@@ -39,7 +38,7 @@ public class UsersController : ControllerBase
         try
         {
             var users = await _usersService.GetUsers();
-            return Ok(users.ToList());
+            return Ok(users);
         }
         catch (Exception e)
         {
@@ -95,10 +94,3 @@ public class UsersController : ControllerBase
     }
 }
 
-public class CreateUsersRequest
-{
-    public string FullName { get; set; }
-    public Document Document { get; set; }
-    public string Email { get; set; }
-    public string Password { get; set; }
-}

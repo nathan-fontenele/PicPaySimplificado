@@ -8,33 +8,34 @@ namespace PicPaySimplificado.Domain;
 public class Users
 {
 
-    private Guid _guid { get;  set; }
-    private string _fullname { get;  set; }
+    public Guid _guid { get;  set; }
+    public string _fullname { get;  set; }
 
-    private string _email {  get;  set; }
+    public string _email {  get;  set; }
 
-    private Document _document { get;  set; }
+    public Document _document { get;  set; }
 
-    private string _password { get;  set; }
+    public string _password { get;  set; }
     
-    private  decimal _balance { get;  set; }
+    public  decimal _balance { get;  set; }
     
-    private UserType _userType { get;  set; }
+    public UserType _userType { get;  set; }
     
     public ICollection<Transaction> SentTransactions { get;  set; } = new List<Transaction>();
     public ICollection<Transaction> ReceivedTransactions { get;  set; } = new List<Transaction>();
     
     private  Users(){}
 
-    public Users(string  fullname, string email, string document, string password)
+    public Users(string  fullname, string document, decimal balance, string email, string password)
     {
         if (string.IsNullOrWhiteSpace(fullname)) throw new ArgumentNullException("Fullname is required.");
         if (string.IsNullOrWhiteSpace(password)) throw new ArgumentNullException("Password is required.");
         if(!IsValidEmail(email))throw new ArgumentException("E-mail is invalid.");
         _guid = Guid.NewGuid();
         _fullname = fullname;
-        _email = email;
         _document = new Document(document);
+        _balance = balance;
+        _email = email;
         _password = password;
     }
     
