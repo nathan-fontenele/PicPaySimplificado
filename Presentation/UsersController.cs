@@ -10,11 +10,11 @@ namespace PicPaySimplificado.Controllers;
 [Route("api/[controller]")]
 public class UsersController : ControllerBase
 {
-    private readonly UsersService  _usersService;
+    private readonly Users  _users;
 
-    public UsersController(UsersService usersService)
+    public UsersController(Users users)
     {
-        _usersService = usersService;
+        _users = users;
     }
 
     [HttpPost("createUser")]
@@ -22,7 +22,7 @@ public class UsersController : ControllerBase
     {
         try
         {
-            await _usersService.CreateUserAsync(user.fullname, user.document, user.balance, user.email, user.password);
+            await _users.CreateUserAsync(user.fullname, user.document, user.balance, user.email, user.password);
             
             return Ok(new { Message = "User created successfully" });
         }
@@ -37,7 +37,7 @@ public class UsersController : ControllerBase
     {
         try
         {
-            var users = await _usersService.GetUsers();
+            var users = await _users.GetUsers();
             return Ok(users);
         }
         catch (Exception e)
@@ -52,7 +52,7 @@ public class UsersController : ControllerBase
         try
         {
             var document = new Document(documentNumber);
-            var user = await _usersService.FindUserByDocumentAsync(document.DocumentNumber);
+            var user = await _users.FindUserByDocumentAsync(document.DocumentNumber);
 
             return Ok(new
             {
@@ -73,7 +73,7 @@ public class UsersController : ControllerBase
     {
         try
         {
-            var user =  await _usersService.FindUserByIdAsync(guid);
+            var user =  await _users.FindUserByIdAsync(guid);
 
             if (user == null)
                 return NotFound(new { Message = "User not found" });

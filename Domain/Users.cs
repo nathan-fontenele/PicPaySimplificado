@@ -8,18 +8,18 @@ namespace PicPaySimplificado.Domain;
 public class Users
 {
 
-    public Guid _guid { get;  set; }
-    public string _fullname { get;  set; }
+    public Guid Guid { get;  set; }
+    public string Fullname { get;  set; }
 
-    public string _email {  get;  set; }
+    public string Email {  get;  set; }
 
-    public Document _document { get;  set; }
+    public Document Document { get;  set; }
 
-    public string _password { get;  set; }
+    public string Password { get;  set; }
     
-    public  decimal _balance { get;  set; }
+    public  decimal Balance { get;  set; }
     
-    public UserType _userType { get;  set; }
+    public UserType UserType { get;  set; }
     
     public ICollection<Transaction> SentTransactions { get;  set; } = new List<Transaction>();
     public ICollection<Transaction> ReceivedTransactions { get;  set; } = new List<Transaction>();
@@ -31,12 +31,12 @@ public class Users
         if (string.IsNullOrWhiteSpace(fullname)) throw new ArgumentNullException("Fullname is required.");
         if (string.IsNullOrWhiteSpace(password)) throw new ArgumentNullException("Password is required.");
         if(!IsValidEmail(email))throw new ArgumentException("E-mail is invalid.");
-        _guid = Guid.NewGuid();
-        _fullname = fullname;
-        _document = new Document(document);
-        _balance = balance;
-        _email = email;
-        _password = password;
+        Guid = Guid.NewGuid();
+        Fullname = fullname;
+        Document = new Document(document);
+        Balance = balance;
+        Email = email;
+        Password = password;
     }
     
     private bool IsValidEmail(string email)
@@ -55,26 +55,26 @@ public class Users
 
     public string GetEmail()
     {
-        return _email;
+        return Email;
     }
 
     public string GetDocument()
     {
-        return _document.ToString();
+        return Document.ToString();
     }
 
     public UserType GetUserType()
     {
-        return _userType;
+        return UserType;
     }
 
     public decimal GetBalance()
     {
-        return _balance;
+        return Balance;
     }
 
     public void setBalance(decimal getBalance)
     {
-        _balance = getBalance;
+        Balance = getBalance;
     }
 }

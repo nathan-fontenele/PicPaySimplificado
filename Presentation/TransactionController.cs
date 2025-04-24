@@ -8,11 +8,11 @@ namespace PicPaySimplificado.Controllers;
 [Route("api/[controller]")]
 public class TransactionController : ControllerBase
 {
-    private readonly TransactionService _transactionService;
+    private readonly Transaction _transaction;
 
-    public TransactionController(TransactionService transactionService)
+    public TransactionController(Transaction transaction)
     {
-        _transactionService = transactionService;
+        _transaction = transaction;
     }
 
     [HttpPost("createTransaction")]
@@ -20,7 +20,7 @@ public class TransactionController : ControllerBase
     {
         try
         {
-            await _transactionService.CreateTransactionAsync(transaction);
+            await _transaction.CreateTransactionAsync(transaction);
             return Ok(new { Message = "Transaction created successfully" });
         }
         catch (Exception ex)

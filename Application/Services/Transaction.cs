@@ -6,31 +6,31 @@ using PicPaySimplificado.DTOs;
 
 namespace PicPaySimplificado.Application
 {
-    public class TransactionService
+    public class Transaction
     {
-        private readonly UsersService _usersService;
-        private readonly ITransactionRepository<Transaction, Guid> _transactionRepository;
-        private readonly NotificationService _notificationService;
+        private readonly Users _users;
+        private readonly ITransactionRepository<Domain.Transaction, Guid> _transactionRepository;
+        private readonly Notification _notification;
 
-        public TransactionService(
-            UsersService usersService,
-            ITransactionRepository<Transaction, Guid> transactionRepository)
+        public Transaction(
+            Users users,
+            ITransactionRepository<Domain.Transaction, Guid> transactionRepository)
         {
-            _usersService = usersService ?? throw new ArgumentNullException(nameof(usersService));
+            _users = users ?? throw new ArgumentNullException(nameof(users));
             _transactionRepository = transactionRepository ?? throw new ArgumentNullException(nameof(transactionRepository));
-            _notificationService = new NotificationService();
+            _notification = new Notification();
         }
 
-        public async Task<Transaction> CreateTransactionAsync(TransactionDto transaction)
+        public async Task<Domain.Transaction> CreateTransactionAsync(TransactionDto transaction)
         {
-            var sender = await _usersService.FindUserByIdAsync(transaction.senderId)
+            var sender = await _users.FindUserByIdAsync(transaction.senderId)
                          ?? throw new ArgumentException($"Sender '{transaction.senderId}' not found");
-            var receiver = await _usersService.FindUserByIdAsync(transaction.receiverId)
+            var receiver = await _users.FindUserByIdAsync(transaction.receiverId)
                          ?? throw new ArgumentException($"Receiver '{transaction.receiverId}' not found");
             
-            _usersService.ValidateSenderForTransaction(sender, transaction.value);
+            _users.ValidateSenderForTransaction(sender, transaction.value);
             
-            bool isAuthorized = this._usersService.ValidateSenderForTransaction(sender, transaction.value);
+            bool isAuthorized = this._users.ValidateSenderForTransaction(sender, transaction.value);
             if (!isAuthorized)
             {
                 throw new UnauthorizedAccessException("Unauthorized");
@@ -39,23 +39,23 @@ namespace PicPaySimplificado.Application
             if (!await ValidateTransactionAsync(transaction.value))
                 throw new InvalidOperationException("Unauthorized transaction");
 
-            var newTransaction = new Transaction
+            var newTransaction = new Domain.Transaction
             {
                 Amount = transaction.value,
-                SenderId = sender._guid,
-                ReceiverId = receiver._guid,
+                SenderId = sender.Guid,
+                ReceiverId = receiver.Guid,
                 Created = DateTime.UtcNow
             };
 
-            sender._balance = sender.GetBalance() - newTransaction.Amount;
-            receiver._balance = receiver.GetBalance() + newTransaction.Amount;
+            sender.Balance = sender.GetBalance() - newTransaction.Amount;
+            receiver.Balance = receiver.GetBalance() + newTransaction.Amount;
 
             await _transactionRepository.AddAsync(newTransaction);
-            await _usersService.UpdateUserAsync(sender);
-            await _usersService.UpdateUserAsync(receiver);
+            await _users.UpdateUserAsync(sender);
+            await _users.UpdateUserAsync(receiver);
 
-            _notificationService.SendeNotification(sender, "Transaction sent successfully");
-            _notificationService.SendeNotification(receiver, "Transaction received successfully");
+            _notification.SendeNotification(sender, "Transaction sent successfully");
+            _notification.SendeNotification(receiver, "Transaction received successfully");
 
             return newTransaction;
         }

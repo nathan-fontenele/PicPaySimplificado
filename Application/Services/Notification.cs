@@ -3,9 +3,9 @@ using PicPaySimplificado.DTOs;
 
 namespace PicPaySimplificado.Application;
 
-public class NotificationService
+public class Notification
 {
-    public void SendeNotification(Users user, string message)
+    public void SendeNotification(Domain.Users user, string message)
     {
         string email = user.GetEmail();
 

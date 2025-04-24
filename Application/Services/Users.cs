@@ -5,16 +5,16 @@ using PicPaySimplificado.ValueObject;
 
 namespace PicPaySimplificado.Application;
 
-public class UsersService
+public class Users
 {
     private readonly UsersRepository _usersRepository;
 
-    public UsersService(UsersRepository usersRepository)
+    public Users(UsersRepository usersRepository)
     {
         _usersRepository = usersRepository;
     }
 
-    public bool ValidateSenderForTransaction(Users sender, decimal amount)
+    public bool ValidateSenderForTransaction(Domain.Users sender, decimal amount)
     {
         if (sender.GetUserType() == UserType.Merchant)
         {
@@ -37,16 +37,16 @@ public class UsersService
         if (await _usersRepository.EmailExistAsync(email))
             throw new Exception("Email already exists");
         
-        var user = new Users(fullName, document.DocumentNumber, balance, email,  password);
+        var user = new Domain.Users(fullName, document.DocumentNumber, balance, email,  password);
         await _usersRepository.AddAsync(user);
     }
     
-    public async Task<List<Users>> GetUsers()
+    public async Task<List<Domain.Users>> GetUsers()
     {
         return await _usersRepository.GetAll();
     }
 
-    public async Task<Users> FindUserByDocumentAsync(string document)
+    public async Task<Domain.Users> FindUserByDocumentAsync(string document)
     {
         var user = await _usersRepository.FindUserByDocumentIdAsync(document);
 
@@ -56,7 +56,7 @@ public class UsersService
         return user;
     }
     
-    public async Task<Users> FindUserByIdAsync(string userId)
+    public async Task<Domain.Users> FindUserByIdAsync(string userId)
     {
         var user = await  this._usersRepository.FindUserByIdAsync(userId);
 
@@ -66,7 +66,7 @@ public class UsersService
         return user;
     }
 
-    public async Task<Users> UpdateUserAsync(Users user)
+    public async Task<Domain.Users> UpdateUserAsync(Domain.Users user)
     {
         await _usersRepository.UpdateAsync(user);
         return user;
